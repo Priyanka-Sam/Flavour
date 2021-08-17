@@ -2,7 +2,6 @@ import icons from 'url:../../img/icons.svg'; // Parcel 2
 import {Fraction} from 'fractional'
 
 class RecipeView{
-
     #parentElement = document.querySelector('.recipe')
     #data
     #errorMessage = 'We could not find that recipe. Please try another one  🙂 '
@@ -18,8 +17,7 @@ class RecipeView{
 
      clear()
      {
-this.#parentElement.innerHTML=''
-     }
+      this.#parentElement.innerHTML = '';     }
 
      generateMarkup(){
         return `<figure class="recipe__fig">
