@@ -26,7 +26,6 @@ state.recipe ={
   ingredients:recipe.ingredients,
 }
 console.log(state.recipe)}
-catch(err){
-    console.log(err)
-      }
+catch(err)
+{throw err}
 }

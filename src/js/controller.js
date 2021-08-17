@@ -28,9 +28,15 @@ await model.loadRecipe(id)
 recipeView.renderRecipe(model.state.recipe)
 }
   catch(err){
-console.log(`${err}💣💣💣💣💣💣💣`)
+recipeView.renderError()
+// recipeView.renderError(`${err}💣💣💣💣💣💣💣`)
+
   }
 }
 
-const events = ['hashchange','load']
-events.forEach(event => window.addEventListener(event,controlRecipes));
+const init= function()
+{
+  recipeView.addHandlerRender(controlRecipes)
+}
+
+init()

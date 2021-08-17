@@ -5,8 +5,10 @@ class RecipeView{
 
     #parentElement = document.querySelector('.recipe')
     #data
-
-     renderRecipe(data)
+    #errorMessage = 'We could not find that recipe. Please try another one  🙂 '
+    #successMessage = ''
+   
+    renderRecipe(data)
      {
          this.#data=data
          const markup =this.generateMarkup()
@@ -110,7 +112,7 @@ this.#parentElement.innerHTML=''
   
 }
 
-     renderSpinner=function ()
+     renderSpinner ()
 {
   const markup = ` <div class="spinner">
   <svg>
@@ -121,6 +123,42 @@ this.clear()
 this.#parentElement.insertAdjacentHTML('afterbegin',markup)
 }
 
+renderMessage(message = this.#successMessage)
+{
+const markup = `<div class="recipe">
+<div class="message">
+  <div>
+    <svg>
+      <use href="src/img/icons.svg#icon-smile"></use>
+    </svg>
+  </div>
+  <p>${message}</p>
+</div>`
+this.clear()
+this.#parentElement.insertAdjacentHTML('afterbegin',markup)
+}
+
+renderError(message = this.#errorMessage)
+{
+const markup = `<div class="error">
+<div>
+  <svg>
+    <use href="${icons}#icon-alert-triangle"></use>
+  </svg>
+</div>
+<p>${message}</p>
+</div>`
+this.clear()
+this.#parentElement.insertAdjacentHTML('afterbegin',markup)
+}
+
+
+addHandlerRender(handler)
+{
+  const events = ['hashchange','load']
+events.forEach(event => window.addEventListener(event,handler));
+
+}
 }
 
 export default new RecipeView()
