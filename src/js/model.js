@@ -1,13 +1,16 @@
 import {async} from 'regenerator-runtime'
-import {API_URL} from './config.js'
+import {API_URL,RES_PER_PAGE} from './config.js'
 import {getJson} from './helper.js'
+import resultsView from './views/resultsView.js'
 
 //state object for storing different recipes, query results
 export const state = {
     recipe:{},
     search:{
       query:'',
-      result:[]
+      result:[],
+      resultsPerPage:RES_PER_PAGE,
+      page:1,
     }
 }
 
@@ -63,4 +66,16 @@ catch(err)
 {
 throw err
 }
+}
+
+//returning set of 10 elementsfrom query results 
+//pagination
+export const getSearchResultsPage = function(page=state.search.page)
+{
+  state.search.page= page
+  const start= (page-1)* state.search.resultsPerPage //0
+  const end = page*state.search.resultsPerPage       //9
+
+  return state.search.result.slice(start,end)
+
 }
