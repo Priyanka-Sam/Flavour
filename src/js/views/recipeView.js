@@ -6,19 +6,23 @@ class RecipeView{
     #data
     #errorMessage = 'We could not find that recipe. Please try another one  🙂 '
     #successMessage = ''
-   
+  
+    //getting markup and attaching it to the parent element
     renderRecipe(data)
      {
-         this.#data=data
-         const markup =this.generateMarkup()
+       //setting variable so that it can be accessed throughout the class
+        this.#data=data
+        const markup =this.generateMarkup()
         this.clear()
         this.#parentElement.insertAdjacentHTML('afterbegin',markup)
      }
 
+     //clearing the parent element
      clear()
      {
       this.#parentElement.innerHTML = '';     }
 
+     //generate html for the parent element 
      generateMarkup(){
         return `<figure class="recipe__fig">
         <img src="${this.#data.image}" alt="${this.#data.title}" class="recipe__img" />
@@ -95,6 +99,7 @@ class RecipeView{
 
      }
 
+     //generate html for the ingredient list
      generateMarkupIngredients(ing)
 {
   return  `<li class="recipe__ingredient">
@@ -110,6 +115,7 @@ class RecipeView{
   
 }
 
+//rendering spinner for before loading activities
      renderSpinner ()
 {
   const markup = ` <div class="spinner">
@@ -121,6 +127,7 @@ this.clear()
 this.#parentElement.insertAdjacentHTML('afterbegin',markup)
 }
 
+//rendering success message in the parent element
 renderMessage(message = this.#successMessage)
 {
 const markup = `<div class="recipe">
@@ -136,6 +143,7 @@ this.clear()
 this.#parentElement.insertAdjacentHTML('afterbegin',markup)
 }
 
+//rendering error message in the parent element
 renderError(message = this.#errorMessage)
 {
 const markup = `<div class="error">
@@ -150,7 +158,7 @@ this.clear()
 this.#parentElement.insertAdjacentHTML('afterbegin',markup)
 }
 
-
+//connecting controller method to event listeners in view
 addHandlerRender(handler)
 {
   const events = ['hashchange','load']

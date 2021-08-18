@@ -1,6 +1,6 @@
 import {TIMEOUT_SEC} from './config.js'
 
-
+//timeout function
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -9,6 +9,7 @@ const timeout = function (s) {
   });
 };
 
+//get json response of any url and return data from it
 export const getJson = async function(url)
 {try
     {

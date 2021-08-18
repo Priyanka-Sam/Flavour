@@ -2,7 +2,7 @@ import {async} from 'regenerator-runtime'
 import {API_URL} from './config.js'
 import {getJson} from './helper.js'
 
-
+//state object for storing different recipes, query results
 export const state = {
     recipe:{},
     search:{
@@ -11,12 +11,15 @@ export const state = {
     }
 }
 
+//loading recipe by id
 export const loadRecipe = async function(id){
   try { 
 
-    const data = await getJson(`${API_URL}/${id}`)
+    //getting data from the api call
+const data = await getJson(`${API_URL}/${id}`)
 const {recipe}= data.data
 
+//storing data in object
 state.recipe ={
   id:recipe.id,
   title :recipe.title,
@@ -32,12 +35,18 @@ catch(err)
 {throw err}
 }
 
+//get search results by query
 export const loadSearchResult = async function(query)
 {
 try{
+
+  //storing query in object
   state.search.query=query
+
+      //getting data from the api call
     const data = await getJson(`${API_URL}?search=${query}`)
 
+    //storing data in object
    state.search.result= data.data.recipes.map(rec => {
       return {
         id: rec.id,
@@ -47,7 +56,7 @@ try{
       };
     });
 
-    console.log(  state.search.result)
+    console.log(state.search.result)
 
 }
 catch(err)

@@ -11,8 +11,8 @@ const recipeContainer = document.querySelector('.recipe');
 
 // https://forkify-api.herokuapp.com/v2
 
-///////////////////////////////////////
 
+//getting data from model and rendering for recipes
 const controlRecipes = async function()
 {
   try{
@@ -25,6 +25,8 @@ await model.loadRecipe(id)
 
 // Step 2 - show Recipe
 recipeView.renderRecipe(model.state.recipe)
+
+//Step 3 Render Results
 }
   catch(err){
 recipeView.renderError()
@@ -32,6 +34,7 @@ recipeView.renderError()
   }
 }
 
+//getting data from model and rendering for search results
 const controlSearchResults = async function()
 {
   try{
@@ -44,7 +47,8 @@ const controlSearchResults = async function()
     // 2) Load search Results
   await model.loadSearchResult(query)
 
-//3 Render results
+    //3 Render results
+
   // console.log(model.state.search.results)
   }
   catch(err)
@@ -52,8 +56,8 @@ const controlSearchResults = async function()
 console.log(err)
   }
 }
-// controlSearchResults()
 
+//init function for publisher-subscriber relation between controller and view
 const init= function()
 {
   recipeView.addHandlerRender(controlRecipes)
