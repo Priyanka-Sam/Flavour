@@ -1,27 +1,28 @@
-class SearchView{
+import View from './view.js';
+class SearchView extends View{
 
-    #parentElement = document.querySelector('.search')
-    #errorMessage = 'We could not find that recipe. Please try another one  🙂 '
-    #successMessage = ''
+    _parentElement = document.querySelector('.search')
+    _errorMessage = 'We could not find that recipe. Please try another one  🙂 '
+    _successMessage = ''
 
  //get query params from the search field   
  getQuery()
  {
-     const query = this.#parentElement.querySelector('.search__field').value
-     this.#clearInput()
+     const query = this._parentElement.querySelector('.search__field').value
+     this.clearInput()
      return query
  }
 
 //clear the search field after getting query  
- #clearInput()
+ clearInput()
  {
-    this.#parentElement.querySelector('.search__field').value=''
+    this._parentElement.querySelector('.search__field').value=''
  }
 
  // connecting controller method to event listeners in view
  addHandlerSearch(handler)
  {
-     this.#parentElement.addEventListener('submit',function(e)
+     this._parentElement.addEventListener('submit',function(e)
      {
          e.preventDefault()
          handler();

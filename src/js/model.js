@@ -56,7 +56,7 @@ try{
       };
     });
 
-    console.log(state.search.result)
+    // console.log(state.search.result)
 
 }
 catch(err)
