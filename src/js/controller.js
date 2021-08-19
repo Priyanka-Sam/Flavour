@@ -29,10 +29,9 @@ if(!id) return;
 //STep 1 - loading recipe 
 await model.loadRecipe(id)
 
-// Step 2 - show Recipe
+//Step 2 Render Results
 recipeView.render(model.state.recipe)
 
-//Step 3 Render Results
 }
   catch(err){
 recipeView.renderError()
@@ -78,12 +77,25 @@ const controlPagination = function(goToPage){
 
 }
 
+//changing serving
+const controlServings = function(newServings)
+{
+  //update recipe servings in state
+  model.updateServings(newServings)
+
+  //update recipe view
+  recipeView.render(model.state.recipe)
+
+}
+
 //init function for publisher-subscriber relation between controller and view
 const init= function()
 {
   recipeView.addHandlerRender(controlRecipes)
+  recipeView.addHandlerUpdateServings(controlServings)
   searchView.addHandlerSearch(controlSearchResults)
   paginationView.addHandlerClick(controlPagination)
 }
 
 init()
+
