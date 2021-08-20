@@ -6,12 +6,18 @@ export default class View
     _errorMessage = 'No recipes found for your query. Please try another one  🙂 '
     _successMessage = ''
   
-    render(data)
+    render(data,render=true)
     {
         if(!data || (Array.isArray(data) && data.length===0 )) return this.renderError()
       //setting variable so that it can be accessed throughout the class
        this._data=data
        const markup =this.generateMarkup()
+
+       if(!render)
+       {
+         return markup
+       }
+
        this.clear()
        this._parentElement.insertAdjacentHTML('afterbegin',markup)
     }

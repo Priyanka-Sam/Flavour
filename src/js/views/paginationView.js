@@ -20,8 +20,8 @@ generateMarkup()
 {
     const currPage = this._data.page
     const numPages= Math.ceil(this._data.result.length/ this._data.resultsPerPage)
-    console.log(numPages)
-    console.log(currPage)
+    // console.log(numPages)
+    // console.log(currPage)
 
     //Page 1 
 if(currPage===1 && numPages>1)

@@ -5,6 +5,7 @@ import * as model from  './model.js'
 import recipeView from './views/recipeView.js'
 import searchView from './views/searchView.js'
 import resultsView from './views/resultsView.js'
+import bookmarksView from './views/bookmarksView.js'
 import paginationView from './views/paginationView.js'
 
 // if(module.hot)
@@ -27,12 +28,14 @@ if(!id) return;
     recipeView.renderSpinner()
 //Step 0 Update results view to mark selected search result
 resultsView.update(model.getSearchResultsPage())
-
 //STep 1 - loading recipe 
 await model.loadRecipe(id)
 
 //Step 2 Render Results
 recipeView.render(model.state.recipe)
+
+//Step 3 Update bookmark
+bookmarksView.update(model.state.bookmarks)
 
 }
   catch(err){
@@ -49,7 +52,6 @@ const controlSearchResults = async function()
 
     //1) get search query
     const query = searchView.getQuery()
-    console.log(query)
     if(!query) return;
 
     // 2) Load search Results
@@ -89,12 +91,36 @@ const controlServings = function(newServings)
   recipeView.update(model.state.recipe)
 
 }
+const controlAddBookmark = function()
+{
+  //1) add/remove bookmark
+  if(!model.state.recipe.bookmarked)
+  {model.addBookmark(model.state.recipe)}
+  else
+  {
+    model.deleteBookmark(model.state.recipe.id)
+  }
+
+  console.log(model.state.recipe)
+  //2) update recipe view
+  recipeView.update(model.state.recipe)
+
+  //3) Renderbookmarks list
+  bookmarksView.render(model.state.bookmarks)
+}
+
+const controlBookmarks = function()
+{
+  bookmarksView.render(model.state.bookmarks)
+}
 
 //init function for publisher-subscriber relation between controller and view
 const init= function()
 {
+  bookmarksView.addHandlerRender(controlBookmarks)
   recipeView.addHandlerRender(controlRecipes)
   recipeView.addHandlerUpdateServings(controlServings)
+  recipeView.addHandlerAddBookmark(controlAddBookmark)
   searchView.addHandlerSearch(controlSearchResults)
   paginationView.addHandlerClick(controlPagination)
 }
