@@ -4,7 +4,7 @@ export default class View
 {
     _data
     _errorMessage = 'No recipes found for your query. Please try another one  🙂 '
-    _successMessage = ''
+    _message = ''
   
     render(data,render=true)
     {
@@ -69,13 +69,13 @@ export default class View
      }
      
      //rendering success message in the parent element
-     renderMessage(message = this._successMessage)
+     renderMessage(message = this._message)
      {
      const markup = `<div class="recipe">
      <div class="message">
        <div>
          <svg>
-           <use href="src/img/icons.svg#icon-smile"></use>
+           <use href="${icons}#icon-smile"></use>
          </svg>
        </div>
        <p>${message}</p>
